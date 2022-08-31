@@ -68,10 +68,9 @@ public class ConwayGameOfLife {
                 if (getState(x, y) == 1) {
                     if (aliveNeighbours < 2 || aliveNeighbours > 3) {
                         newBoard[x][y] = 0;
-                        return;
+                    } else {
+                        newBoard[x][y] = 1;
                     }
-                    newBoard[x][y] = 1;
-                    return;
                 }
                 newBoard[x][y] = aliveNeighbours == 3 ? 1 : 0;
             }
@@ -84,19 +83,12 @@ public class ConwayGameOfLife {
 
         board.setAlive(2, 2);
         board.setAlive(3, 2);
-        board.setAlive(3, 3);
+        board.setAlive(3, 4);
 
         board.print();
-
-        System.out.println("Alive neighbours for [1][2]: " +
-                board.countAliveNeighbours(1, 2));
-
         board.nextRound();
-
         board.print();
-
         board.nextRound();
-
         board.print();
     }
 }
