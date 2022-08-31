@@ -71,8 +71,9 @@ public class ConwayGameOfLife {
                     } else {
                         newBoard[x][y] = 1;
                     }
+                } else {
+                    newBoard[x][y] = aliveNeighbours == 3 ? 1 : 0;
                 }
-                newBoard[x][y] = aliveNeighbours == 3 ? 1 : 0;
             }
         }
         this.board = newBoard;
@@ -81,9 +82,9 @@ public class ConwayGameOfLife {
     public static void main(String[] args) {
         ConwayGameOfLife board = new ConwayGameOfLife(10, 10);
 
-        board.setAlive(2, 2);
-        board.setAlive(3, 2);
-        board.setAlive(3, 4);
+        board.setAlive(3, 3);
+        board.setAlive(4, 3);
+        board.setAlive(5, 3);
 
         board.print();
         board.nextRound();
