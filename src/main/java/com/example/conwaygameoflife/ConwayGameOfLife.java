@@ -19,21 +19,21 @@ public class ConwayGameOfLife {
     public int countAliveNeighbours(int x, int y) {
         int count = 0;
 
-        count += isAlive(x - 1, y - 1);
-        count += isAlive(x - 1, y);
-        count += isAlive(x - 1, y + 1);
+        count += getState(x - 1, y - 1);
+        count += getState(x - 1, y);
+        count += getState(x - 1, y + 1);
 
-        count += isAlive(x, y - 1);
-        count += isAlive(x, y + 1);
+        count += getState(x, y - 1);
+        count += getState(x, y + 1);
 
-        count += isAlive(x + 1, y - 1);
-        count += isAlive(x + 1, y);
-        count += isAlive(x + 1, y + 1);
+        count += getState(x + 1, y - 1);
+        count += getState(x + 1, y);
+        count += getState(x + 1, y + 1);
 
         return count;
     }
 
-    public int isAlive(int x, int y) {
+    public int getState(int x, int y) {
         if (x < 0 || x >= width) {
             return 0;
         }
@@ -59,22 +59,24 @@ public class ConwayGameOfLife {
     }
 
     public void nextRound() {
+        int[][] newBoard = new int[width][height];
+
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int aliveNeighbours = countAliveNeighbours(x, y);
 
-                if (this.board[x][y] == 1) {
+                if (getState(x, y) == 1) {
                     if (aliveNeighbours < 2 || aliveNeighbours > 3) {
-                        this.board[x][y] = 0;
+                        newBoard[x][y] = 0;
                         return;
                     }
-                    this.board[x][y] = 1;
+                    newBoard[x][y] = 1;
                     return;
                 }
-                this.board[x][y] = aliveNeighbours == 3 ? 1 : 0;
+                newBoard[x][y] = aliveNeighbours == 3 ? 1 : 0;
             }
         }
-
+        this.board = newBoard;
     }
 
     public static void main(String[] args) {
